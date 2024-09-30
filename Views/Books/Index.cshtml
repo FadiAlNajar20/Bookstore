@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Bookstore.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center">Search</h3>
+
+<!-- Search Form -->
+<div class="d-flex justify-content-center mb-4">
+    <form asp-action="Index" method="get" class="w-50">
+        <div class="form-group d-flex">
+            <input type="text" name="searchString" class="form-control w-75" placeholder="Search by title or author..." value="@ViewData["CurrentFilter"]" />
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </div>
+    </form>
+</div>
+
+<h1 class="text-center">List of Books</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
